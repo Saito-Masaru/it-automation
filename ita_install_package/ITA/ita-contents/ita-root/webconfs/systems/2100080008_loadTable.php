@@ -378,9 +378,9 @@ Terraform代入値管理
     //************************************************************************************
     //----Sensitive設定
     //************************************************************************************
-    $c = new IDColumn('SENSITIVE_FLAG',$g['objMTS']->getSomeMessage("ITATERRAFORM-MNU-103760"), 'B_TERRAFORM_VARS_SENSITIVE', 'VARS_SENSITIVE', 'VARS_SENSITIVE_SELECT', '', array('SELECT_ADD_FOR_ORDER'=>array('VARS_SENSITIVE'), 'ORDER'=>'ORDER BY ADD_SELECT_1'));
+    $c = new IDColumn('SENSITIVE_FLAG',$g['objMTS']->getSomeMessage("ITATERRAFORM-MNU-103760"), 'B_SENSITIVE_FLAG', 'VARS_SENSITIVE', 'VARS_SENSITIVE_SELECT', '', array('SELECT_ADD_FOR_ORDER'=>array('VARS_SENSITIVE'), 'ORDER'=>'ORDER BY ADD_SELECT_1'));
     $c->setDescription($g['objMTS']->getSomeMessage("ITATERRAFORM-MNU-103770")); //エクセル・ヘッダでの説明
-    $c->setJournalTableOfMaster('B_TERRAFORM_VARS_SENSITIVE_JNL');
+    $c->setJournalTableOfMaster('B_SENSITIVE_FLAG_JNL');
     $c->setRequired(true); //登録/更新時には、入力必須
     //コンテンツのソースがヴューの場合、登録/更新の対象とする
     $c->setHiddenMainTableColumn(true);
@@ -390,14 +390,53 @@ Terraform代入値管理
     //************************************************************************************
     //----具体値
     //************************************************************************************
-    $objVldt = new SingleTextValidator(0,8192,false);
-    $c = new SensitiveColumn('VARS_ENTRY',$g['objMTS']->getSomeMessage("ITATERRAFORM-MNU-103740"), 'SENSITIVE_FLAG');
+    $objVldt = new MultiTextValidator(0,8192,false);
+    $c = new SensitiveMultiTextColumn('VARS_ENTRY',$g['objMTS']->getSomeMessage("ITATERRAFORM-MNU-103740"), 'SENSITIVE_FLAG');
     $c->setDescription($g['objMTS']->getSomeMessage("ITATERRAFORM-MNU-103750"));//エクセル・ヘッダでの説明
     $c->setValidator($objVldt);
-    $c->setRequired(true);     //登録/更新時には入力必須
     //コンテンツのソースがヴューの場合、登録/更新の対象とする
     $c->setHiddenMainTableColumn(true);
+
     $table->addColumn($c);
+
+
+    // 登録/更新/廃止/復活があった場合、データベースを更新した事をマークする。
+    $tmpObjFunction = function($objColumn, $strEventKey, &$exeQueryData, &$reqOrgData=array(), &$aryVariant=array()){
+        $boolRet = true;
+        $intErrorType = null;
+        $aryErrMsgBody = array();
+        $strErrMsg = "";
+        $strErrorBuf = "";
+        $strFxName = "";
+
+        $modeValue = $aryVariant["TCA_PRESERVED"]["TCA_ACTION"]["ACTION_MODE"];
+        if( $modeValue=="DTUP_singleRecRegister" || $modeValue=="DTUP_singleRecUpdate" || $modeValue=="DTUP_singleRecDelete" ){
+            if( $modeValue=="DTUP_singleRecDelete" ){
+                // 廃止の場合のみ
+                $modeValue_sub = $aryVariant["TCA_PRESERVED"]["TCA_ACTION"]["ACTION_SUB_MODE"];//['mode_sub'];("on"/"off")
+                if( $modeValue_sub == "on" ){
+
+                    $strQuery = "UPDATE A_PROC_LOADED_LIST "
+                               ."SET LOADED_FLG='0' ,LAST_UPDATE_TIMESTAMP = NOW(6) "
+                               ."WHERE ROW_ID IN (2100080002) ";
+
+                    $aryForBind = array();
+
+                    $aryRetBody = singleSQLExecuteAgent($strQuery, $aryForBind, $strFxName);
+
+                    if( $aryRetBody[0] !== true ){
+                        $boolRet = false;
+                        $strErrMsg = $aryRetBody[2];
+                        $intErrorType = 500;
+                    }
+                }
+            }
+        }
+        $retArray = array($boolRet,$intErrorType,$aryErrMsgBody,$strErrMsg,$strErrorBuf);
+        return $retArray;
+    };
+    $tmpAryColumn = $table->getColumns();
+    $tmpAryColumn['ASSIGN_ID']->setFunctionForEvent('beforeTableIUDAction',$tmpObjFunction);
 
 
 //----head of setting [multi-set-unique]
