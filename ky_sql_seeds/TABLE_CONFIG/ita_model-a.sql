@@ -11,8 +11,14 @@
 -- シーケンスオブジェクト作成
 CREATE TABLE A_SEQUENCE
 (
+ID                      %INT%                   ,
 NAME                    %VARCHR%(64)            ,
 VALUE                   %INT%                   ,
+MENU_ID                 %INT%                   ,
+NOTE                    %VARCHR%(4000)          ,
+DISUSE_FLAG             %VARCHR%(1)             ,
+LAST_UPDATE_TIMESTAMP   %DATETIME6%             ,
+LAST_UPDATE_USER        %INT%                   ,
 PRIMARY KEY(NAME)
 )%%TABLE_CREATE_OUT_TAIL%%;
 
@@ -274,6 +280,22 @@ PRIMARY KEY(JOURNAL_SEQ_NO)
 )%%TABLE_CREATE_OUT_TAIL%%;
 
 -- 履歴系テーブル作成
+CREATE TABLE A_SEQUENCE_JNL
+(
+JOURNAL_SEQ_NO          %INT%                   ,
+JOURNAL_REG_DATETIME    %DATETIME6%             ,
+JOURNAL_ACTION_CLASS    %VARCHR%(8)             ,
+ID                      %INT%                   ,
+NAME                    %VARCHR%(64)            ,
+VALUE                   %INT%                   ,
+MENU_ID                 %INT%                   ,
+NOTE                    %VARCHR%(4000)          ,
+DISUSE_FLAG             %VARCHR%(1)             ,
+LAST_UPDATE_TIMESTAMP   %DATETIME6%             ,
+LAST_UPDATE_USER        %INT%                   ,
+PRIMARY KEY(JOURNAL_SEQ_NO)
+)%%TABLE_CREATE_OUT_TAIL%%;
+
 CREATE TABLE A_ACCOUNT_LIST_JNL
 (
 JOURNAL_SEQ_NO          %INT%                   ,
@@ -3712,6 +3734,7 @@ PRIMARY KEY(JOURNAL_SEQ_NO)
 
 -- VIEW作成
 
+CREATE UNIQUE INDEX IND_A_SEQUENCE_01               ON A_ACCOUNT_LIST           ( ID                                        );
 CREATE UNIQUE INDEX IND_A_ACCOUNT_LIST_01           ON A_ACCOUNT_LIST           ( USER_ID, DISUSE_FLAG                      );
 CREATE        INDEX IND_A_ACCOUNT_LOCK_01           ON A_ACCOUNT_LOCK           ( USER_ID                                   );
 CREATE        INDEX IND_A_ACCOUNT_LOCK_02           ON A_ACCOUNT_LOCK           ( USER_ID, DISUSE_FLAG                      );
