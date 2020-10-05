@@ -3734,7 +3734,7 @@ PRIMARY KEY(JOURNAL_SEQ_NO)
 
 -- VIEW作成
 
-CREATE UNIQUE INDEX IND_A_SEQUENCE_01               ON A_ACCOUNT_LIST           ( ID                                        );
+CREATE UNIQUE INDEX IND_A_SEQUENCE_01               ON A_SEQUENCE               ( ID                                        );
 CREATE UNIQUE INDEX IND_A_ACCOUNT_LIST_01           ON A_ACCOUNT_LIST           ( USER_ID, DISUSE_FLAG                      );
 CREATE        INDEX IND_A_ACCOUNT_LOCK_01           ON A_ACCOUNT_LOCK           ( USER_ID                                   );
 CREATE        INDEX IND_A_ACCOUNT_LOCK_02           ON A_ACCOUNT_LOCK           ( USER_ID, DISUSE_FLAG                      );
