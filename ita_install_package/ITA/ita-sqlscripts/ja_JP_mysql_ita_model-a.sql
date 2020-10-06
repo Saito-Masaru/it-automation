@@ -2821,6 +2821,35 @@ PRIMARY KEY(JOURNAL_SEQ_NO)
 -- *** *****  WEB-DBCORE Views                                               ***
 -- *****************************************************************************
 -- ここからWEB-DBCORE用
+CREATE VIEW D_SEQUENCE AS 
+SELECT TAB_A.ID                   ,
+       TAB_A.NAME                 ,
+       TAB_A.VALUE                ,
+       TAB_A.MENU_ID              ,
+       TAB_A.NOTE                 ,
+       TAB_A.DISUSE_FLAG          ,
+       TAB_A.LAST_UPDATE_TIMESTAMP,
+       TAB_A.LAST_UPDATE_USER      
+FROM   A_SEQUENCE TAB_A
+WHERE  TAB_A.ID > 0 AND
+       TAB_A.MENU_ID IS NOT NULL;
+
+CREATE VIEW D_SEQUENCE_JNL AS 
+SELECT TAB_A.JOURNAL_SEQ_NO       ,
+       TAB_A.JOURNAL_REG_DATETIME ,
+       TAB_A.JOURNAL_ACTION_CLASS ,
+       TAB_A.ID                   ,
+       TAB_A.NAME                 ,
+       TAB_A.VALUE                ,
+       TAB_A.MENU_ID              ,
+       TAB_A.NOTE                 ,
+       TAB_A.DISUSE_FLAG          ,
+       TAB_A.LAST_UPDATE_TIMESTAMP,
+       TAB_A.LAST_UPDATE_USER      
+FROM   A_SEQUENCE_JNL TAB_A
+WHERE  TAB_A.ID > 0 AND
+       TAB_A.MENU_ID IS NOT NULL;
+
 CREATE VIEW D_ACCOUNT_LIST AS 
 SELECT TAB_A.USER_ID              ,
        TAB_A.USERNAME             ,
