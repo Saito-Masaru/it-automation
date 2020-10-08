@@ -806,8 +806,14 @@ function turnToReadonly () {
     if (document.getElementById('update_table1') !== null &&
         document.getElementById('update_table3') !== null ) {
 
-        // NAMEのtextboxをreadonlyにする
-        document.getElementById('update_table1').readOnly = true;
+        // NAMEのtextboxを隠して(display:none)spanで表示しなおす
+        let nameInput = document.getElementById('update_table1');
+        let nameText = nameInput.value;
+        let nameNode = document.createElement('span');
+        nameNode.textContent = nameText;
+        nameInput.style.display = 'none';
+        nameInput.parentNode.appendChild(nameNode);
+
         // MENU_IDのselecrのoptionsからselected以外削除
         let menuSelect = document.getElementById('update_table3');
         let options = menuSelect.options;
@@ -826,12 +832,10 @@ function turnToReadonly () {
         });
         // 既存node(span)を非表示(form自体は有効)
         menuSelect.nextElementSibling.style.display = 'none';
-        // 非表示にした場所にtextbox(readOnly)を追加
-        let tmpNode = document.createElement('input');
-        tmpNode.type = 'text';
-        tmpNode.value = selectedString;
-        tmpNode.readOnly = true;
-        menuSelect.parentNode.appendChild(tmpNode);
+        // 非表示にした場所に単純なspanタグを追加
+        let menunameNode = document.createElement('span');
+        menunameNode.textContent = selectedString;
+        menuSelect.parentNode.appendChild(menunameNode);
     }
 }
 // ここまでカスタマイズした場合の一般メソッド配置域----
