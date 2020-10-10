@@ -801,40 +801,23 @@ function setInputButtonDisable(rangeId,targetClass,toValue){
 //////// 汎用系ファンクション---- ////////
 
 //---- ここからカスタマイズした場合の一般メソッド配置域
-// 更新formのNAME,MENU_IDを編集不可にする
+// 更新formのNAME,MENU_IDを編集不可(読み取り専用)にする
 function turnToReadonly () {
     if (document.getElementById('update_table1') !== null &&
         document.getElementById('update_table3') !== null ) {
 
-        // NAMEのtextboxを隠して(display:none)spanで表示しなおす
+        // NAMEのtextboxを隠して読み取り専用で表示しなおす
         let nameInput = document.getElementById('update_table1');
-        let nameText = nameInput.value;
         let nameNode = document.createElement('span');
-        nameNode.textContent = nameText;
+        nameNode.textContent = nameInput.value;
         nameInput.style.display = 'none';
         nameInput.parentNode.appendChild(nameNode);
 
-        // MENU_IDのselecrのoptionsからselected以外削除
+        // MENUのselectBoxを隠して読み取り専用で表示しなおす
         let menuSelect = document.getElementById('update_table3');
-        let options = menuSelect.options;
-        let deleteOptions = [];
-        let selectedString = '';
-        for (let i=0; options[i]; i++) {
-            if (options[i].selected === false) {
-                deleteOptions.push(options[i]);
-            }
-            if (options[i].selected === true) {
-                selectedString = options[i].text;
-            }
-        }
-        deleteOptions.forEach( function(value) {
-            menuSelect.removeChild(value);
-        });
-        // 既存node(span)を非表示(form自体は有効)
-        menuSelect.nextElementSibling.style.display = 'none';
-        // 非表示にした場所に単純なspanタグを追加
         let menunameNode = document.createElement('span');
-        menunameNode.textContent = selectedString;
+        menunameNode.textContent = menuSelect.options[menuSelect.selectedIndex].text;
+        menuSelect.nextElementSibling.style.display = 'none';
         menuSelect.parentNode.appendChild(menunameNode);
     }
 }

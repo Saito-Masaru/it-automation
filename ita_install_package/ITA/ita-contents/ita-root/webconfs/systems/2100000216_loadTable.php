@@ -42,7 +42,6 @@ $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
     $c->setRequired(true);
     $c->setValidator(new TextValidator(0, 64, false));
     $c->setHiddenMainTableColumn(true);
-    //$c->setOutputType('update_table', new OutputType(new ReqTabHFmt(), new StaticTextTabBFmt("",true))); // 更新FORMでREADONLY状態にする
     $table->addColumn($c);
 
     // 設定値
@@ -58,7 +57,6 @@ $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
     $c->setRequired(false);
     $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230042"));
     $c->setHiddenMainTableColumn(true);
-    //$c->setOutputType('update_table', new OutputType(new ReqTabHFmt(), new StaticTextTabBFmt("",true))); // 更新FORMでREADONLY状態にする
     $table->addColumn($c);
 
     $table->fixColumn();
