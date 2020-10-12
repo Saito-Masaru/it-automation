@@ -394,6 +394,7 @@ $ary[1220041] = "Setting Value";
 $ary[1220042] = "Setting Value: max 256byte";
 $ary[1220043] = "Setting Value";
 $ary[1230001] = "Configure settings for the sequence.";
+$ary[1230002] = "Sequence_list";
 $ary[1230011] = "Sequence ID";
 $ary[1230021] = "Sequence Name";
 $ary[1230022] = "Can't be changed";
