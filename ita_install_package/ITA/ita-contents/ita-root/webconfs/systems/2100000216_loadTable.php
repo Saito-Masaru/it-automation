@@ -28,9 +28,9 @@ $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
 
     // 項番
     $table = new TableControlAgent('D_SEQUENCE', 'ID',  $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230011"), 'D_SEQUENCE_JNL');
-    $table->setDBMainTableLabel($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230011"));
 
     // TABLE settings
+    $table->setDBMainTableLabel($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230002"));
     $table->setGeneObject('AutoSearchStart',true);  //('',true,false)
     $table->setGeneObject('webSetting', $arrayWebSetting);
     $table->setDBMainTableHiddenID('A_SEQUENCE');
