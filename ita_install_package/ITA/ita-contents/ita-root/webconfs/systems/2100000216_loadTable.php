@@ -56,7 +56,7 @@ $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
     $c = new IDColumn('MENU_GROUP_ID', $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230041"), 'D_MENU_GROUP_LIST', 'MENU_GROUP_ID', 'MENU_GROUP_NAME', NULL);
     $c->setRequired(false);
     $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230042"));
-    $c->setHiddenMainTableColumn(true);
+    $c->setHiddenMainTableColumn(false);
     $table->addColumn($c);
 
     // MENU_ID
