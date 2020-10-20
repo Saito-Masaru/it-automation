@@ -34,6 +34,7 @@ PW_LAST_UPDATE_TIME     DATETIME(6)             ,
 AUTH_TYPE               VARCHAR (10)            ,
 PROVIDER_ID             INT                     ,
 PROVIDER_USER_ID        VARCHAR (256)           ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -60,6 +61,7 @@ ITEM_ID                 INT                     ,
 CONFIG_ID               VARCHAR (32)            ,
 CONFIG_NAME             VARCHAR (64)            ,
 VALUE                   VARCHAR (1024)          ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -72,6 +74,7 @@ CREATE TABLE A_PERMISSIONS_LIST
 PERMISSIONS_ID          INT                     ,
 IP_ADDRESS              VARCHAR (15)            ,
 IP_INFO                 VARCHAR (256)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -83,6 +86,7 @@ CREATE TABLE A_ROLE_LIST
 (
 ROLE_ID                 INT                     ,
 ROLE_NAME               VARCHAR (256)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -96,6 +100,7 @@ MENU_GROUP_ID           INT                     ,
 MENU_GROUP_NAME         VARCHAR (256)            ,
 MENU_GROUP_ICON         VARCHAR (256)           ,
 DISP_SEQ                INT                     ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -116,6 +121,7 @@ WEB_PRINT_LIMIT         INT                     ,
 WEB_PRINT_CONFIRM       INT                     ,
 XLS_PRINT_LIMIT         INT                     ,
 DISP_SEQ                INT                     ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -128,6 +134,8 @@ CREATE TABLE A_ROLE_ACCOUNT_LINK_LIST
 LINK_ID                 INT                     ,
 ROLE_ID                 INT                     ,
 USER_ID                 INT                     ,
+DEF_ACCESS_AUTH_FLAG    VARCHAR (1)             ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -141,6 +149,7 @@ LINK_ID                 INT                     ,
 ROLE_ID                 INT                     ,
 MENU_ID                 INT                     ,
 PRIVILEGE               INT                     ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -152,6 +161,7 @@ CREATE TABLE A_LOGIN_NECESSITY_LIST
 (
 FLAG                    INT                     ,
 NAME                    VARCHAR (64)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -163,6 +173,7 @@ CREATE TABLE A_SERVICE_STATUS_LIST
 (
 FLAG                    INT                     ,
 NAME                    VARCHAR (64)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -185,6 +196,7 @@ CREATE TABLE A_PRIVILEGE_LIST
 (
 FLAG                    INT                     ,
 NAME                    VARCHAR (64)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -199,6 +211,7 @@ PROVIDER_NAME                  VARCHAR (100)                , -- プロバイダ
 LOGO                           VARCHAR (256)                , -- ロゴ
 AUTH_TYPE                      VARCHAR (10)                 , -- 認証方式
 VISIBLE_FLAG                   INT                          , -- 表示フラグ
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -211,6 +224,7 @@ PROVIDER_ATTRIBUTE_ID          INT                          , -- 属性ID
 PROVIDER_ID                    INT                          , -- プロバイダーID
 NAME                           VARCHAR (100)                , -- 属性名
 VALUE                          VARCHAR (256)                , -- 属性値
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -221,6 +235,7 @@ PRIMARY KEY (PROVIDER_ATTRIBUTE_ID)
 CREATE TABLE A_PROVIDER_AUTH_TYPE_LIST (
 ID                             INT                          , -- ID
 NAME                           VARCHAR (10)                 , -- 認証方式名称
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -231,6 +246,7 @@ PRIMARY KEY (ID)
 CREATE TABLE A_VISIBLE_FLAG_LIST (
 ID                             INT                          , -- ID
 FLAG                           VARCHAR (10)                 , -- 表示フラグ名称
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -241,6 +257,7 @@ PRIMARY KEY (ID)
 CREATE TABLE A_PROVIDER_ATTRIBUTE_NAME_LIST (
 ID                             INT                          , -- SSO認証属性名称ID
 NAME                           VARCHAR (50)                 , -- SSO認証属性名称
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -256,6 +273,7 @@ CREATE TABLE F_PARAM_TARGET
 TARGET_ID                           INT                             , -- 識別シーケンス項番
 DISP_SEQ                            INT                             , 
 TARGET_NAME                         VARCHAR (64)                    ,
+ACCESS_AUTH                         TEXT                            ,
 NOTE                                VARCHAR  (4000)                 , -- 備考
 DISUSE_FLAG                         VARCHAR  (1)                    , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP               DATETIME(6)                     , -- 最終更新日時
@@ -272,6 +290,7 @@ JOURNAL_ACTION_CLASS                VARCHAR  (8)                    , -- 履歴�
 TARGET_ID                           INT                             , -- 識別シーケンス項番
 DISP_SEQ                            INT                             , 
 TARGET_NAME                         VARCHAR (64)                    ,
+ACCESS_AUTH                         TEXT                            ,
 NOTE                                VARCHAR  (4000)                 , -- 備考
 DISUSE_FLAG                         VARCHAR  (1)                    , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP               DATETIME(6)                     , -- 最終更新日時
@@ -310,6 +329,7 @@ PW_LAST_UPDATE_TIME     DATETIME(6)             ,
 AUTH_TYPE               VARCHAR (10)            ,
 PROVIDER_ID             INT                     ,
 PROVIDER_USER_ID        VARCHAR (256)           ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -342,6 +362,7 @@ ITEM_ID                 INT                     ,
 CONFIG_ID               VARCHAR (32)            ,
 CONFIG_NAME             VARCHAR (64)            ,
 VALUE                   VARCHAR (1024)          ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -357,6 +378,7 @@ JOURNAL_ACTION_CLASS    VARCHAR (8)             ,
 PERMISSIONS_ID          INT                     ,
 IP_ADDRESS              VARCHAR (15)            ,
 IP_INFO                 VARCHAR (256)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -371,6 +393,7 @@ JOURNAL_REG_DATETIME    DATETIME(6)             ,
 JOURNAL_ACTION_CLASS    VARCHAR (8)             ,
 ROLE_ID                 INT                     ,
 ROLE_NAME               VARCHAR (256)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -387,6 +410,7 @@ MENU_GROUP_ID           INT                     ,
 MENU_GROUP_NAME         VARCHAR (256)            ,
 MENU_GROUP_ICON         VARCHAR (256)           ,
 DISP_SEQ                INT                     ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -410,6 +434,7 @@ WEB_PRINT_LIMIT         INT                     ,
 WEB_PRINT_CONFIRM       INT                     ,
 XLS_PRINT_LIMIT         INT                     ,
 DISP_SEQ                INT                     ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -425,6 +450,8 @@ JOURNAL_ACTION_CLASS    VARCHAR (8)             ,
 LINK_ID                 INT                     ,
 ROLE_ID                 INT                     ,
 USER_ID                 INT                     ,
+DEF_ACCESS_AUTH_FLAG    VARCHAR (1)             ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -441,6 +468,7 @@ LINK_ID                 INT                     ,
 ROLE_ID                 INT                     ,
 MENU_ID                 INT                     ,
 PRIVILEGE               INT                     ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -455,6 +483,7 @@ JOURNAL_REG_DATETIME    DATETIME(6)             ,
 JOURNAL_ACTION_CLASS    VARCHAR (8)             ,
 FLAG                    INT                     ,
 NAME                    VARCHAR (64)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -469,6 +498,7 @@ JOURNAL_REG_DATETIME    DATETIME(6)             ,
 JOURNAL_ACTION_CLASS    VARCHAR (8)             ,
 FLAG                    INT                     ,
 NAME                    VARCHAR (64)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -497,6 +527,7 @@ JOURNAL_REG_DATETIME    DATETIME(6)             ,
 JOURNAL_ACTION_CLASS    VARCHAR (8)             ,
 FLAG                    INT                     ,
 NAME                    VARCHAR (64)            ,
+ACCESS_AUTH             TEXT                    ,
 NOTE                    VARCHAR (4000)          ,
 DISUSE_FLAG             VARCHAR (1)             ,
 LAST_UPDATE_TIMESTAMP   DATETIME(6)             ,
@@ -509,6 +540,7 @@ CREATE TABLE A_TODO_MASTER
 TODO_ID                           INT                               , -- 識別シーケンス
 TODO_STATUS                       VARCHAR (64)                      , -- ステータス
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -525,6 +557,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                       , -- 履歴�
 TODO_ID                           INT                               , -- 識別シーケンス
 TODO_STATUS                       VARCHAR (64)                      , -- ステータス
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -544,6 +577,7 @@ PROVIDER_NAME                VARCHAR (100)                  , -- プロバイダ
 LOGO                         VARCHAR (256)                  , -- ロゴ
 AUTH_TYPE                    VARCHAR (10)                   , -- 認証方式
 VISIBLE_FLAG                 INT                            , -- 表示フラグ
+ACCESS_AUTH                  TEXT                           ,
 NOTE                         VARCHAR (4000)                 , -- 備考
 DISUSE_FLAG                  VARCHAR (1)                    , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP        DATETIME(6)                    , -- 最終更新日時
@@ -560,6 +594,7 @@ PROVIDER_ATTRIBUTE_ID          INT                          , -- 属性ID
 PROVIDER_ID                    INT                          , -- プロバイダーID
 NAME                           VARCHAR (100)                , -- 属性名
 VALUE                          VARCHAR (256)                , -- 属性値
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -574,6 +609,7 @@ JOURNAL_ACTION_CLASS           VARCHAR (8)                  , -- 履歴用変更
 
 ID                             INT                          , -- ID
 NAME                           VARCHAR (10)                 , -- 認証方式名称
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -587,6 +623,7 @@ JOURNAL_REG_DATETIME           DATETIME(6)                  , -- 履歴用変更
 JOURNAL_ACTION_CLASS           VARCHAR (8)                  , -- 履歴用変更種別
 
 ID                             INT                          , -- ID
+ACCESS_AUTH                    TEXT                         ,
 FLAG                           VARCHAR (10)                 , -- 表示フラグ名称
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
@@ -602,6 +639,7 @@ JOURNAL_ACTION_CLASS           VARCHAR (8)                  , -- 履歴用変更
 
 ID                             INT                          , -- SSO認証属性名称ID
 NAME                           VARCHAR (50)                 , -- SSO認証属性名称
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -628,6 +666,7 @@ MENU_ID                         INT                          , -- 作業管理�
 EXEC_INS_MNG_TABLE_NAME         VARCHAR (64)                 , -- 作業インスタンステーブル名
 LOG_TARGET                      INT                          , -- ログ収集対象有無 1:対象 他:対象外
 DISP_SEQ                        INT                          ,
+ACCESS_AUTH                     TEXT                         ,
 NOTE                            VARCHAR (4000)               ,
 DISUSE_FLAG                     VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP           DATETIME(6)                  ,
@@ -649,6 +688,7 @@ MENU_ID                         INT                          , -- 作業管理�
 EXEC_INS_MNG_TABLE_NAME         VARCHAR (64)                 , -- 作業インスタンステーブル名
 LOG_TARGET                      INT                          , -- ログ収集対象有無 1:対象 他:対象外
 DISP_SEQ                        INT                          ,
+ACCESS_AUTH                     TEXT                         ,
 NOTE                            VARCHAR (4000)               ,
 DISUSE_FLAG                     VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP           DATETIME(6)                  ,
@@ -665,6 +705,7 @@ HARDAWRE_TYPE_ID                  INT                       ,
 HARDAWRE_TYPE_NAME                VARCHAR (64)              ,
 
 DISP_SEQ                          INT                       , -- 表示順序
+ACCESS_AUTH                       TEXT                      ,
 NOTE                              VARCHAR (4000)            , -- 備考
 DISUSE_FLAG                       VARCHAR (1)               , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)               , -- 最終更新日時
@@ -686,6 +727,7 @@ HARDAWRE_TYPE_ID                  INT                       ,
 HARDAWRE_TYPE_NAME                VARCHAR (64)              ,
 
 DISP_SEQ                          INT                       , -- 表示順序
+ACCESS_AUTH                       TEXT                      ,
 NOTE                              VARCHAR (4000)            , -- 備考
 DISUSE_FLAG                       VARCHAR (1)               , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)               , -- 最終更新日時
@@ -702,6 +744,7 @@ PROTOCOL_ID                       INT                       ,
 PROTOCOL_NAME                     VARCHAR (32)              ,
 
 DISP_SEQ                          INT                       , -- 表示順序
+ACCESS_AUTH                       TEXT                      ,
 NOTE                              VARCHAR (4000)            , -- 備考
 DISUSE_FLAG                       VARCHAR (1)               , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)               , -- 最終更新日時
@@ -723,6 +766,7 @@ PROTOCOL_ID                       INT                       ,
 PROTOCOL_NAME                     VARCHAR (32)              ,
 
 DISP_SEQ                          INT                       , -- 表示順序
+ACCESS_AUTH                       TEXT                      ,
 NOTE                              VARCHAR (4000)            , -- 備考
 DISUSE_FLAG                       VARCHAR (1)               , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)               , -- 最終更新日時
@@ -739,6 +783,7 @@ HOST_DESIGNATE_TYPE_ID            INT                       ,
 HOST_DESIGNATE_TYPE_NAME          VARCHAR (32)              ,
 
 DISP_SEQ                          INT                       , -- 表示順序
+ACCESS_AUTH                       TEXT                      ,
 NOTE                              VARCHAR (4000)            , -- 備考
 DISUSE_FLAG                       VARCHAR (1)               , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)               , -- 最終更新日時
@@ -760,6 +805,7 @@ HOST_DESIGNATE_TYPE_ID            INT                       ,
 HOST_DESIGNATE_TYPE_NAME          VARCHAR (32)              ,
 
 DISP_SEQ                          INT                       , -- 表示順序
+ACCESS_AUTH                       TEXT                      ,
 NOTE                              VARCHAR (4000)            , -- 備考
 DISUSE_FLAG                       VARCHAR (1)               , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)               , -- 最終更新日時
@@ -808,6 +854,7 @@ CONN_SSH_KEY_FILE                 VARCHAR (256)             ,
 ANSTWR_INSTANCE_GROUP_NAME        VARCHAR (512)             , -- インスタンスグループ名
 
 DISP_SEQ                          INT                       , -- 表示順序
+ACCESS_AUTH                       TEXT                      ,
 NOTE                              VARCHAR (4000)            , -- 備考
 DISUSE_FLAG                       VARCHAR (1)               , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)               , -- 最終更新日時
@@ -859,6 +906,7 @@ CONN_SSH_KEY_FILE                 VARCHAR (256)             ,
 ANSTWR_INSTANCE_GROUP_NAME        VARCHAR (512)             , -- インスタンスグループ名
 
 DISP_SEQ                          INT                       , -- 表示順序
+ACCESS_AUTH                       TEXT                      ,
 NOTE                              VARCHAR (4000)            , -- 備考
 DISUSE_FLAG                       VARCHAR (1)               , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)               , -- 最終更新日時
@@ -887,6 +935,7 @@ OPENST_ENVIRONMENT                VARCHAR (256)                    ,
 TERRAFORM_WORKSPACE_ID            INT                              , -- Terraform利用情報
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -920,6 +969,7 @@ OPENST_ENVIRONMENT                VARCHAR (256)                    ,
 TERRAFORM_WORKSPACE_ID            INT                              , -- Terraform利用情報
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -939,6 +989,7 @@ OPERATION_NO_IDBH                 INT                        ,
 LAST_EXECUTE_TIMESTAMP            DATETIME(6)                ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -963,6 +1014,7 @@ OPERATION_NO_IDBH                 INT                        ,
 LAST_EXECUTE_TIMESTAMP            DATETIME(6)                ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -980,6 +1032,7 @@ SYMPHONY_STORAGE_PATH_ITA         VARCHAR (256)              , -- ITA側のSymph
 SYMPHONY_REFRESH_INTERVAL         INT                        , -- 状態監視周期(単位ミリ秒)
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1002,6 +1055,7 @@ SYMPHONY_STORAGE_PATH_ITA         VARCHAR (256)              , -- ITA側のSymph
 SYMPHONY_REFRESH_INTERVAL         INT                        , -- 状態監視周期(単位ミリ秒)
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1020,6 +1074,7 @@ SYMPHONY_NAME                     VARCHAR (256)              ,
 DESCRIPTION                       VARCHAR (4000)             ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1042,6 +1097,7 @@ SYMPHONY_NAME                     VARCHAR (256)              ,
 DESCRIPTION                       VARCHAR (4000)             ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1068,6 +1124,7 @@ TIME_START                        DATETIME(6)                ,
 TIME_END                          DATETIME(6)                ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1099,6 +1156,7 @@ TIME_START                        DATETIME(6)                ,
 TIME_END                          DATETIME(6)                ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1121,6 +1179,7 @@ SYMPHONY_CLASS_NO                 INT                        ,
 OPERATION_NO_IDBH                 INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1148,6 +1207,7 @@ SYMPHONY_CLASS_NO                 INT                        ,
 OPERATION_NO_IDBH                 INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1186,6 +1246,7 @@ OVRD_I_OPERATION_NAME             VARCHAR (256)              ,
 OVRD_I_OPERATION_NO_IDBH          INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1229,6 +1290,7 @@ OVRD_I_OPERATION_NAME             VARCHAR (256)              ,
 OVRD_I_OPERATION_NO_IDBH          INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1245,6 +1307,7 @@ SYM_EXE_STATUS_ID                 INT                        ,
 SYM_EXE_STATUS_NAME               VARCHAR (32)               ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1266,6 +1329,7 @@ SYM_EXE_STATUS_ID                 INT                        ,
 SYM_EXE_STATUS_NAME               VARCHAR (32)               ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1283,6 +1347,7 @@ SYM_ABORT_FLAG_ID                 INT                        ,
 SYM_ABORT_FLAG_NAME               VARCHAR (32)               ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1304,6 +1369,7 @@ SYM_ABORT_FLAG_ID                 INT                        ,
 SYM_ABORT_FLAG_NAME               VARCHAR (32)               ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1468,6 +1534,7 @@ LOGIN_AUTH_TYPE_ID                INT                        , -- 識別シー�
 LOGIN_AUTH_TYPE_NAME              VARCHAR (32)               ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1489,6 +1556,7 @@ LOGIN_AUTH_TYPE_ID                INT                        , -- 識別シー�
 LOGIN_AUTH_TYPE_NAME              VARCHAR (32)               ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -1507,6 +1575,7 @@ FLAG_ID                           INT                              , -- 識別�
 FLAG_NAME                         VARCHAR (32)                      , -- 表示名
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -1528,6 +1597,7 @@ FLAG_ID                           INT                              , -- 識別�
 FLAG_NAME                         VARCHAR (32)                     , -- 表示名
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -1554,6 +1624,7 @@ DP_TYPE                           INT                               , -- 処理�
 IMPORT_TYPE                       INT                               , -- インポート種別
 FILE_NAME                         VARCHAR (64)                      , -- ファイル名
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1573,6 +1644,7 @@ DP_TYPE                           INT                               , -- 処理�
 IMPORT_TYPE                       INT                               , -- インポート種別
 FILE_NAME                         VARCHAR (64)                      , -- ファイル名
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1585,6 +1657,7 @@ CREATE TABLE B_DP_STATUS_MASTER
 TASK_ID                           INT                               , -- 識別シーケンス
 TASK_STATUS                       VARCHAR (64)                      , -- ステータス
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1601,6 +1674,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                       , -- 履歴�
 TASK_ID                           INT                               , -- 識別シーケンス
 TASK_STATUS                       VARCHAR (64)                      , -- ステータス
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1612,6 +1686,7 @@ CREATE TABLE B_DP_TYPE
 (
 ROW_ID                            INT                               , -- 識別シーケンス
 DP_TYPE                           VARCHAR (64)                      , -- 処理種別
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1627,6 +1702,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                       , -- 履歴�
 --
 ROW_ID                            INT                               , -- 識別シーケンス
 DP_TYPE                           VARCHAR (64)                      , -- 処理種別
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1638,6 +1714,7 @@ CREATE TABLE B_DP_IMPORT_TYPE
 (
 ROW_ID                            INT                               , -- 識別シーケンス
 IMPORT_TYPE                       VARCHAR (64)                      , -- インポート種別
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1653,6 +1730,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                       , -- 履歴�
 --
 ROW_ID                            INT                               , -- 識別シーケンス
 IMPORT_TYPE                       VARCHAR (64)                      , -- インポート種別
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1670,6 +1748,7 @@ AD_GROUP_SID                      VARCHAR (256)                     , -- ADグ�
 ITA_ROLE_ID                       INT                               , -- ITAロールID
 
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1690,6 +1769,7 @@ AD_GROUP_SID                      VARCHAR (256)                     , -- ADグ�
 ITA_ROLE_ID                       INT                               , -- ITAロールID
 
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1705,6 +1785,7 @@ AD_USER_SID                       VARCHAR (256)                     , -- ADユ�
 ITA_USER_ID                       INT                               , -- ITAユーザID
 
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1725,6 +1806,7 @@ AD_USER_SID                       VARCHAR (256)                     , -- ADユ�
 ITA_USER_ID                       INT                               , -- ITAユーザID
 
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1832,6 +1914,7 @@ TASK_STATUS                       INT                               , -- ステ�
 DP_TYPE                           INT                               , -- 処理種別
 FILE_NAME                         VARCHAR (64)                      , -- ファイル名
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1850,6 +1933,7 @@ TASK_STATUS                       INT                               , -- ステ�
 DP_TYPE                           INT                               , -- 処理種別
 FILE_NAME                         VARCHAR (64)                      , -- ファイル名
 DISP_SEQ                          INT                               , -- 表示順序
+ACCESS_AUTH                       TEXT                              ,
 NOTE                              VARCHAR (4000)                    , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                       , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                       , -- 最終更新日時
@@ -1926,6 +2010,7 @@ PATTERN_DAY                       INT                          ,
 PATTERN_DAY_OF_WEEK               INT                          ,
 PATTERN_WEEK_NUMBER               INT                          ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -1959,6 +2044,7 @@ PATTERN_DAY                       INT                          ,
 PATTERN_DAY_OF_WEEK               INT                          ,
 PATTERN_WEEK_NUMBER               INT                          ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -1974,6 +2060,7 @@ CREATE TABLE B_REGULARLY_STATUS
 REGULARLY_STATUS_ID               INT                          ,
 REGULARLY_STATUS_NAME             VARCHAR (32)                 ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -1993,6 +2080,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                  ,
 REGULARLY_STATUS_ID               INT                          ,
 REGULARLY_STATUS_NAME             VARCHAR (32)                 ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2007,6 +2095,7 @@ CREATE TABLE B_REGULARLY_PERIOD
 REGULARLY_PERIOD_ID               INT                          ,
 REGULARLY_PERIOD_NAME             VARCHAR (32)                 ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2026,6 +2115,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                  ,
 REGULARLY_PERIOD_ID               INT                          ,
 REGULARLY_PERIOD_NAME             VARCHAR (32)                 ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2041,6 +2131,7 @@ CREATE TABLE B_DAY_OF_WEEK
 DAY_OF_WEEK_ID                    INT                          ,
 DAY_OF_WEEK_NAME                  VARCHAR (16)                 ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2060,6 +2151,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                  ,
 DAY_OF_WEEK_ID                    INT                          ,
 DAY_OF_WEEK_NAME                  VARCHAR (16)                 ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2075,6 +2167,7 @@ CREATE TABLE B_WEEK_NUMBER
 WEEK_NUMBER_ID                    INT                          ,
 WEEK_NUMBER_NAME                  VARCHAR (16)                 ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2094,6 +2187,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                  ,
 WEEK_NUMBER_ID                    INT                          ,
 WEEK_NUMBER_NAME                  VARCHAR (16)                 ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2118,6 +2212,7 @@ CONDUCTOR_STORAGE_PATH_ITA         VARCHAR (256)              , -- ITA側のCOND
 CONDUCTOR_REFRESH_INTERVAL         INT                        , -- 状態監視周期(単位ミリ秒)
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2138,6 +2233,7 @@ CONDUCTOR_STORAGE_PATH_ITA         VARCHAR (256)              , -- ITA側のCOND
 CONDUCTOR_REFRESH_INTERVAL         INT                        , -- 状態監視周期(単位ミリ秒)
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2155,6 +2251,7 @@ CONDUCTOR_NAME                    VARCHAR (256)              ,
 DESCRIPTION                       VARCHAR (4000)             ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2175,6 +2272,7 @@ CONDUCTOR_NAME                    VARCHAR (256)              ,
 DESCRIPTION                       VARCHAR (4000)             ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2204,6 +2302,7 @@ POINT_W                           INT                        ,
 POINT_H                           INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2236,6 +2335,7 @@ POINT_W                           INT                        ,
 POINT_H                           INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2263,6 +2363,7 @@ POINT_X                           INT                        ,
 POINT_Y                           INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2293,6 +2394,7 @@ POINT_X                           INT                        ,
 POINT_Y                           INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2310,6 +2412,7 @@ CONDUCTOR_NAME                    VARCHAR (256)              ,
 DESCRIPTION                       VARCHAR (4000)             ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2330,6 +2433,7 @@ CONDUCTOR_NAME                    VARCHAR (256)              ,
 DESCRIPTION                       VARCHAR (4000)             ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2477,6 +2581,7 @@ TIME_START                        DATETIME(6)                ,
 TIME_END                          DATETIME(6)                ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2508,6 +2613,7 @@ TIME_START                        DATETIME(6)                ,
 TIME_END                          DATETIME(6)                ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2548,6 +2654,7 @@ OVRD_I_OPERATION_NAME             VARCHAR (256)              ,
 OVRD_I_OPERATION_NO_IDBH          INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2590,6 +2697,7 @@ OVRD_I_OPERATION_NAME             VARCHAR (256)              ,
 OVRD_I_OPERATION_NO_IDBH          INT                        ,
 
 DISP_SEQ                          INT                        , -- 表示順序
+ACCESS_AUTH                       TEXT                       ,
 NOTE                              VARCHAR (4000)             , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                , -- 最終更新日時
@@ -2675,6 +2783,7 @@ CREATE TABLE B_SENSITIVE_FLAG
 VARS_SENSITIVE                    INT                              ,
 VARS_SENSITIVE_SELECT             VARCHAR (16)                     ,
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -2690,6 +2799,7 @@ JOURNAL_ACTION_CLASS              VARCHAR (8)                      , -- 履歴�
 VARS_SENSITIVE                    INT                              ,
 VARS_SENSITIVE_SELECT             VARCHAR (16)                     ,
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -2721,6 +2831,7 @@ PATTERN_DAY                       INT                          ,
 PATTERN_DAY_OF_WEEK               INT                          ,
 PATTERN_WEEK_NUMBER               INT                          ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2752,6 +2863,7 @@ PATTERN_DAY                       INT                          ,
 PATTERN_DAY_OF_WEEK               INT                          ,
 PATTERN_WEEK_NUMBER               INT                          ,
 DISP_SEQ                          INT                          ,
+ACCESS_AUTH                       TEXT                         ,
 NOTE                              VARCHAR (4000)               ,
 DISUSE_FLAG                       VARCHAR (1)                  ,
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                  ,
@@ -2782,6 +2894,7 @@ COBBLER_PROFILE_ID                INT                              , -- 識別�
 COBBLER_PROFILE_NAME              VARCHAR (256)                    ,
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -2805,6 +2918,7 @@ COBBLER_PROFILE_ID                INT                              , -- 識別�
 COBBLER_PROFILE_NAME              VARCHAR (256)                    ,
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -2837,6 +2951,7 @@ SELECT TAB_A.USER_ID              ,
        TAB_A.AUTH_TYPE            ,
        TAB_A.PROVIDER_ID          ,
        TAB_A.PROVIDER_USER_ID     ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -2865,6 +2980,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO       ,
        TAB_A.AUTH_TYPE            ,
        TAB_A.PROVIDER_ID          ,
        TAB_A.PROVIDER_USER_ID     ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -2879,6 +2995,7 @@ SELECT TAB_A.MENU_GROUP_ID        ,
        TAB_A.MENU_GROUP_NAME      ,
        TAB_A.MENU_GROUP_ID          MENU_GROUP_ID_CLONE,
        CONCAT(TAB_A.MENU_GROUP_ID,':',TAB_A.MENU_GROUP_NAME) MENU_GROUP_PULLDOWN,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -2893,6 +3010,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO       ,
        TAB_A.MENU_GROUP_NAME      ,
        TAB_A.MENU_GROUP_ID          MENU_GROUP_ID_CLONE,
        CONCAT(TAB_A.MENU_GROUP_ID,':',TAB_A.MENU_GROUP_NAME) MENU_GROUP_PULLDOWN,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -2906,6 +3024,7 @@ SELECT TAB_A.ROLE_ID              ,
        CONCAT(TAB_A.ROLE_ID,':',TAB_A.ROLE_NAME) ROLE_PULLDOWN,
        TAB_B.GROUP_JUDGE_ID       ,
        TAB_B.AD_GROUP_SID         ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -2923,6 +3042,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO       ,
        CONCAT(TAB_A.ROLE_ID,':',TAB_A.ROLE_NAME) ROLE_PULLDOWN,
        TAB_B.GROUP_JUDGE_ID       ,
        TAB_B.AD_GROUP_SID         ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -2946,6 +3066,7 @@ SELECT TAB_A.MENU_ID              ,
        TAB_A.WEB_PRINT_CONFIRM    ,
        TAB_A.XLS_PRINT_LIMIT      ,
        TAB_A.DISP_SEQ             ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -2973,6 +3094,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO       ,
        TAB_A.WEB_PRINT_CONFIRM    ,
        TAB_A.XLS_PRINT_LIMIT      ,
        TAB_A.DISP_SEQ             ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -2991,6 +3113,7 @@ SELECT TAB_A.LINK_ID              ,
        TAB_B.MENU_NAME            ,
        TAB_A.MENU_ID                MENU_ID_CLONE,
        TAB_A.PRIVILEGE            ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3014,6 +3137,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO       ,
        TAB_B.MENU_NAME            ,
        TAB_A.MENU_ID                MENU_ID_CLONE,
        TAB_A.PRIVILEGE            ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3031,6 +3155,8 @@ SELECT TAB_A.LINK_ID              ,
        TAB_A.USER_ID              ,
        TAB_B.USERNAME             ,
        TAB_A.USER_ID                USER_ID_CLONE,
+       TAB_A.DEF_ACCESS_AUTH_FLAG ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3051,6 +3177,8 @@ SELECT TAB_A.JOURNAL_SEQ_NO       ,
        TAB_A.USER_ID              ,
        TAB_B.USERNAME             ,
        TAB_A.USER_ID                USER_ID_CLONE,
+       TAB_A.DEF_ACCESS_AUTH_FLAG ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3066,6 +3194,7 @@ SELECT TAB_A.PROVIDER_ID,
        TAB_A.LOGO,
        TAB_A.AUTH_TYPE,
        TAB_A.VISIBLE_FLAG,
+       TAB_A.ACCESS_AUTH,
        TAB_A.NOTE,
        TAB_A.DISUSE_FLAG,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3081,6 +3210,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO,
        TAB_A.LOGO,
        TAB_A.AUTH_TYPE,
        TAB_A.VISIBLE_FLAG,
+       TAB_A.ACCESS_AUTH,
        TAB_A.NOTE,
        TAB_A.DISUSE_FLAG,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3092,6 +3222,7 @@ SELECT TAB_A.PROVIDER_ATTRIBUTE_ID,
        TAB_A.PROVIDER_ID,
        TAB_A.NAME,
        TAB_A.VALUE,
+       TAB_A.ACCESS_AUTH,
        TAB_A.NOTE,
        TAB_A.DISUSE_FLAG,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3106,6 +3237,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO,
        TAB_A.PROVIDER_ID,
        TAB_A.NAME,
        TAB_A.VALUE,
+       TAB_A.ACCESS_AUTH,
        TAB_A.NOTE,
        TAB_A.DISUSE_FLAG,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3182,6 +3314,7 @@ SELECT TAB_A.SYSTEM_ID                        SYSTEM_ID                     ,
        TAB_A.CONN_SSH_KEY_FILE                CONN_SSH_KEY_FILE             ,
 
        TAB_A.DISP_SEQ                         DISP_SEQ                      ,
+       TAB_A.ACCESS_AUTH                      ACCESS_AUTH                   ,
        TAB_A.NOTE                             NOTE                          ,
        TAB_A.DISUSE_FLAG                      DISUSE_FLAG                   ,
        TAB_A.LAST_UPDATE_TIMESTAMP            LAST_UPDATE_TIMESTAMP         ,
@@ -3221,6 +3354,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO                   JOURNAL_SEQ_NO                ,
        TAB_A.CONN_SSH_KEY_FILE                CONN_SSH_KEY_FILE             ,
 
        TAB_A.DISP_SEQ                         DISP_SEQ                      ,
+       TAB_A.ACCESS_AUTH                      ACCESS_AUTH                   ,
        TAB_A.NOTE                             NOTE                          ,
        TAB_A.DISUSE_FLAG                      DISUSE_FLAG                   ,
        TAB_A.LAST_UPDATE_TIMESTAMP            LAST_UPDATE_TIMESTAMP         ,
@@ -3236,6 +3370,7 @@ SELECT TAB_A.OPERATION_NO_UAPK    ,
        TAB_A.OPERATION_NO_IDBH    ,
        CONCAT(TAB_A.OPERATION_NO_IDBH,':',TAB_A.OPERATION_NAME) OPERATION,
        TAB_A.DISP_SEQ             ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3253,6 +3388,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO       ,
        TAB_A.OPERATION_NO_IDBH    ,
        CONCAT(TAB_A.OPERATION_NO_IDBH,':',TAB_A.OPERATION_NAME) OPERATION,
        TAB_A.DISP_SEQ             ,
+       TAB_A.ACCESS_AUTH          ,
        TAB_A.NOTE                 ,
        TAB_A.DISUSE_FLAG          ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
@@ -3284,6 +3420,7 @@ SELECT OPERATION_NO_IDBH                             OPERATION_ID           ,
        OPERATION_DATE                                                       ,
        DATE_FORMAT( OPERATION_DATE, '%Y/%m/%d %H:%i' ) OPERATION_DATE_DISP  ,
        LAST_EXECUTE_TIMESTAMP                                               ,
+       ACCESS_AUTH                                                          ,
        NOTE                                                                 ,
        DISUSE_FLAG                                                          ,
        LAST_UPDATE_TIMESTAMP                                                ,
@@ -3303,6 +3440,7 @@ MENU_ID                        INT                     , -- メニューID
 SHEET_TYPE                     INT                     , -- シートタイプ　null/1:ホスト/オペレーションを含む　2:ホストのみ
 
 DISP_SEQ                       INT                     , -- 表示順序
+ACCESS_AUTH                    TEXT                    ,
 NOTE                           VARCHAR (4000)          , -- 備考
 DISUSE_FLAG                    VARCHAR (1)             , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)             , -- 最終更新日時
@@ -3321,6 +3459,7 @@ MENU_ID                        INT                     , -- メニューID
 SHEET_TYPE                     INT                     , -- シートタイプ　null/1:ホスト/オペレーションを含む　2:ホストのみ
 
 DISP_SEQ                       INT                     , -- 表示順序
+ACCESS_AUTH                    TEXT                    ,
 NOTE                           VARCHAR (4000)          , -- 備考
 DISUSE_FLAG                    VARCHAR (1)             , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)             , -- 最終更新日時
@@ -3339,6 +3478,7 @@ SELECT
        CONCAT(TAB_B.MENU_GROUP_ID,':',TAB_C.MENU_GROUP_NAME,':',TAB_A.MENU_ID,':',TAB_B.MENU_NAME) MENU_PULLDOWN,
        TAB_A.SHEET_TYPE                     ,
        TAB_A.DISP_SEQ                       ,
+       TAB_A.ACCESS_AUTH                    ,
        TAB_A.NOTE                           ,
        TAB_A.DISUSE_FLAG                    ,
        TAB_A.LAST_UPDATE_TIMESTAMP          ,
@@ -3362,6 +3502,7 @@ SELECT TAB_A.JOURNAL_SEQ_NO                 ,
        CONCAT(TAB_B.MENU_GROUP_ID,':',TAB_C.MENU_GROUP_NAME,':',TAB_A.MENU_ID,':',TAB_B.MENU_NAME) MENU_PULLDOWN,
        TAB_A.SHEET_TYPE                     ,
        TAB_A.DISP_SEQ                       ,
+       TAB_A.ACCESS_AUTH                    ,
        TAB_A.NOTE                           ,
        TAB_A.DISUSE_FLAG                    ,
        TAB_A.LAST_UPDATE_TIMESTAMP          ,
@@ -3382,6 +3523,7 @@ TABLE_NAME                     VARCHAR (64)            , -- テーブル名
 PKEY_NAME                      VARCHAR (64)            , -- 主キーカラム名
 
 DISP_SEQ                       INT                     , -- 表示順序
+ACCESS_AUTH                    TEXT                    ,
 NOTE                           VARCHAR (4000)          , -- 備考
 DISUSE_FLAG                    VARCHAR (1)             , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)             , -- 最終更新日時
@@ -3401,6 +3543,7 @@ TABLE_NAME                     VARCHAR (64)            , -- テーブル名
 PKEY_NAME                      VARCHAR (64)            , -- 主キーカラム名
 
 DISP_SEQ                       INT                     , -- 表示順序
+ACCESS_AUTH                    TEXT                    ,
 NOTE                           VARCHAR (4000)          , -- 備考
 DISUSE_FLAG                    VARCHAR (1)             , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)             , -- 最終更新日時
@@ -3423,6 +3566,7 @@ REF_PKEY_NAME                  VARCHAR (64)            , -- 参照テーブル�
 REF_COL_NAME                   VARCHAR (64)            , -- 参照テーブルカラム名
 
 DISP_SEQ                       INT                     , -- 表示順序
+ACCESS_AUTH                    TEXT                    ,
 NOTE                           VARCHAR (4000)          , -- 備考
 DISUSE_FLAG                    VARCHAR (1)             , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)             , -- 最終更新日時
@@ -3447,6 +3591,7 @@ REF_PKEY_NAME                  VARCHAR (64)            , -- 参照テーブル�
 REF_COL_NAME                   VARCHAR (64)            , -- 参照テーブルカラム名
 
 DISP_SEQ                       INT                     , -- 表示順序
+ACCESS_AUTH                    TEXT                    ,
 NOTE                           VARCHAR (4000)          , -- 備考
 DISUSE_FLAG                    VARCHAR (1)             , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)             , -- 最終更新日時
@@ -3464,6 +3609,7 @@ COLUMN_TYPE_ID                    INT                              , -- 識別�
 COLUMN_TYPE_NAME                  VARCHAR (32)                     , -- カラムタイプ　1/空白:Value型　2:Key-Value型
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -3483,6 +3629,7 @@ COLUMN_TYPE_ID                    INT                              , -- 識別�
 COLUMN_TYPE_NAME                  VARCHAR (32)                     , -- カラムタイプ　1/空白:Value型　2:Key-Value型
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -3551,7 +3698,8 @@ SELECT
   TAB_B.MENU_GROUP_ID,
   TAB_B.MENU_GROUP_NAME,
   CONCAT(TAB_B.MENU_GROUP_ID,':',TAB_B.MENU_GROUP_NAME,':',TAB_A.MENU_ID,':',TAB_A.MENU_NAME) MENU_PULLDOWN,
-  TAB_A.DISUSE_FLAG
+  TAB_A.DISUSE_FLAG,
+  TAB_A.ACCESS_AUTH
 FROM 
   ( A_MENU_LIST TAB_A
     INNER JOIN A_MENU_GROUP_LIST TAB_B ON TAB_B.MENU_GROUP_ID = TAB_A.MENU_GROUP_ID )
@@ -3568,7 +3716,8 @@ SELECT
   TAB_B.MENU_GROUP_ID,
   TAB_B.MENU_GROUP_NAME,
   CONCAT(TAB_B.MENU_GROUP_ID,':',TAB_B.MENU_GROUP_NAME,':',TAB_A.MENU_ID,':',TAB_A.MENU_NAME) MENU_PULLDOWN,
-  TAB_A.DISUSE_FLAG
+  TAB_A.DISUSE_FLAG,
+  TAB_A.ACCESS_AUTH
 FROM 
   ( A_MENU_LIST_JNL TAB_A
     INNER JOIN A_MENU_GROUP_LIST TAB_B ON TAB_B.MENU_GROUP_ID = TAB_A.MENU_GROUP_ID )
@@ -3589,6 +3738,7 @@ SELECT
   TAB_B.SHEET_TYPE                     ,
   TAB_A.COL_TITLE_DISP_SEQ             ,
   TAB_A.DISP_SEQ                       ,
+  TAB_A.ACCESS_AUTH                    ,
   TAB_A.NOTE                           ,
   TAB_A.DISUSE_FLAG                    ,
   TAB_A.LAST_UPDATE_TIMESTAMP          ,
@@ -3611,6 +3761,7 @@ SELECT
   TAB_B.SHEET_TYPE                     ,
   TAB_A.COL_TITLE_DISP_SEQ             ,
   TAB_A.DISP_SEQ                       ,
+  TAB_A.ACCESS_AUTH                    ,
   TAB_A.NOTE                           ,
   TAB_A.DISUSE_FLAG                    ,
   TAB_A.LAST_UPDATE_TIMESTAMP          ,
@@ -3802,6 +3953,7 @@ DATA_PATH_2                     VARCHAR (1024)              , -- 履歴データ
 DATA_PATH_3                     VARCHAR (1024)              , -- 履歴データパス3
 DATA_PATH_4                     VARCHAR (1024)              , -- 履歴データパス4
 
+ACCESS_AUTH                     TEXT                        ,
 NOTE                            VARCHAR (4000)              , -- 備考
 DISUSE_FLAG                     VARCHAR (1)                 , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP           DATETIME(6)                 , -- 最終更新日時
@@ -3826,6 +3978,7 @@ DATA_PATH_2                     VARCHAR (1024)              , -- 履歴データ
 DATA_PATH_3                     VARCHAR (1024)              , -- 履歴データパス3
 DATA_PATH_4                     VARCHAR (1024)              , -- 履歴データパス4
 
+ACCESS_AUTH                     TEXT                        ,
 NOTE                            VARCHAR (4000)              , -- 備考
 DISUSE_FLAG                     VARCHAR (1)                 , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP           DATETIME(6)                 , -- 最終更新日時
@@ -3844,6 +3997,7 @@ TARGET_DIR                     VARCHAR (1024)               , -- 削除対象デ
 TARGET_FILE                    VARCHAR (1024)               , -- 削除対象ファイル
 DEL_SUB_DIR_FLG                INT                          , -- サブディレクトリ削除有無
 
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -3863,6 +4017,7 @@ TARGET_DIR                     VARCHAR (1024)               , -- 削除対象デ
 TARGET_FILE                    VARCHAR (1024)               , -- 削除対象ファイル
 DEL_SUB_DIR_FLG                INT                          , -- サブディレクトリ削除有無
 
+ACCESS_AUTH                    TEXT                         ,
 NOTE                           VARCHAR (4000)               , -- 備考
 DISUSE_FLAG                    VARCHAR (1)                  , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP          DATETIME(6)                  , -- 最終更新日時
@@ -3900,6 +4055,7 @@ FLAG_ID                           INT                              , -- 識別�
 FLAG_NAME                         VARCHAR (32)                     , -- 表示名
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
@@ -3921,6 +4077,7 @@ FLAG_ID                           INT                              , -- 識別�
 FLAG_NAME                         VARCHAR (32)                     , -- 表示名
 
 DISP_SEQ                          INT                              , -- 表示順序
+ACCESS_AUTH                       TEXT                             ,
 NOTE                              VARCHAR (4000)                   , -- 備考
 DISUSE_FLAG                       VARCHAR (1)                      , -- 廃止フラグ
 LAST_UPDATE_TIMESTAMP             DATETIME(6)                      , -- 最終更新日時
