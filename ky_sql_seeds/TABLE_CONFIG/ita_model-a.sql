@@ -16,7 +16,6 @@ VALUE                   %INT%                   ,
 MENU_ID                 %INT%                   ,
 DISP_SEQ                %INT%                   ,
 NOTE                    %VARCHR%(4000)          ,
-DISUSE_FLAG             %VARCHR%(1)             ,
 LAST_UPDATE_TIMESTAMP   %DATETIME6%             ,
 LAST_UPDATE_USER        %INT%                   ,
 PRIMARY KEY(NAME)
