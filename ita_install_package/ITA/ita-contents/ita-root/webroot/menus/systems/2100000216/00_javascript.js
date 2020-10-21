@@ -803,26 +803,18 @@ function setInputButtonDisable(rangeId,targetClass,toValue){
 //---- ここからカスタマイズした場合の一般メソッド配置域
 // 更新formのNAME,MENU_GROUP_ID,MENU_IDを編集不可(読み取り専用)にする
 function turnToReadonly () {
-    if (document.getElementById('update_table1') !== null &&
-        document.getElementById('update_table3') !== null &&
-        document.getElementById('update_table4') !== null ) {
-
-        // NAMEのtextBoxを隠して読み取り専用で表示しなおす
-        let nameInput = document.getElementById('update_table1');
-        let nameNode = document.createElement('span');
-        nameNode.textContent = nameInput.value;
-        nameInput.style.display = 'none';
-        nameInput.parentNode.appendChild(nameNode);
+    if (document.getElementById('update_table2') !== null &&
+        document.getElementById('update_table3') !== null ) {
 
         // MENU_GROUPのselectBoxを隠して読み取り専用で表示しなおす
-        let menugroupSelect = document.getElementById('update_table3');
+        let menugroupSelect = document.getElementById('update_table2');
         let menugroupnameNode = document.createElement('span');
         menugroupnameNode.textContent = menugroupSelect.options[menugroupSelect.selectedIndex].text;
         menugroupSelect.nextElementSibling.style.display = 'none';
         menugroupSelect.parentNode.appendChild(menugroupnameNode);
 
         // MENUのselectBoxを隠して読み取り専用で表示しなおす
-        let menuSelect = document.getElementById('update_table4');
+        let menuSelect = document.getElementById('update_table3');
         let menunameNode = document.createElement('span');
         menunameNode.textContent = menuSelect.options[menuSelect.selectedIndex].text;
         menuSelect.nextElementSibling.style.display = 'none';

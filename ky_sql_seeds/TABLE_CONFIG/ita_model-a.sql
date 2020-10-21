@@ -11,10 +11,10 @@
 -- シーケンスオブジェクト作成
 CREATE TABLE A_SEQUENCE
 (
-ID                      %INT%                   ,
 NAME                    %VARCHR%(64)            ,
 VALUE                   %INT%                   ,
 MENU_ID                 %INT%                   ,
+DISP_SEQ                %INT%                   ,
 NOTE                    %VARCHR%(4000)          ,
 DISUSE_FLAG             %VARCHR%(1)             ,
 LAST_UPDATE_TIMESTAMP   %DATETIME6%             ,
@@ -299,22 +299,6 @@ PRIMARY KEY(JOURNAL_SEQ_NO)
 )%%TABLE_CREATE_OUT_TAIL%%;
 
 -- 履歴系テーブル作成
-CREATE TABLE A_SEQUENCE_JNL
-(
-JOURNAL_SEQ_NO          %INT%                   ,
-JOURNAL_REG_DATETIME    %DATETIME6%             ,
-JOURNAL_ACTION_CLASS    %VARCHR%(8)             ,
-ID                      %INT%                   ,
-NAME                    %VARCHR%(64)            ,
-VALUE                   %INT%                   ,
-MENU_ID                 %INT%                   ,
-NOTE                    %VARCHR%(4000)          ,
-DISUSE_FLAG             %VARCHR%(1)             ,
-LAST_UPDATE_TIMESTAMP   %DATETIME6%             ,
-LAST_UPDATE_USER        %INT%                   ,
-PRIMARY KEY(JOURNAL_SEQ_NO)
-)%%TABLE_CREATE_OUT_TAIL%%;
-
 CREATE TABLE A_ACCOUNT_LIST_JNL
 (
 JOURNAL_SEQ_NO          %INT%                   ,
@@ -3245,37 +3229,18 @@ SELECT TAB_A.JOURNAL_SEQ_NO,
 FROM A_PROVIDER_ATTRIBUTE_LIST_JNL TAB_A;
 
 CREATE VIEW D_SEQUENCE AS 
-SELECT TAB_A.ID                   ,
-       TAB_A.NAME                 ,
+SELECT TAB_A.NAME                 ,
        TAB_A.VALUE                ,
        TAB_A.MENU_ID              ,
        TAB_B.MENU_GROUP_ID        ,
+       TAB_A.DISP_SEQ             ,
        TAB_A.NOTE                 ,
-       TAB_A.DISUSE_FLAG          ,
+       '0' as DISUSE_FLAG         ,
        TAB_A.LAST_UPDATE_TIMESTAMP,
        TAB_A.LAST_UPDATE_USER      
-FROM   A_SEQUENCE  as TAB_A
-       LEFT JOIN D_MENU_LIST as TAB_B on TAB_A.MENU_ID = TAB_B.MENU_ID
-WHERE  TAB_A.ID > 0 AND
-       TAB_A.MENU_ID IS NOT NULL;
-
-CREATE VIEW D_SEQUENCE_JNL AS 
-SELECT TAB_A.JOURNAL_SEQ_NO       ,
-       TAB_A.JOURNAL_REG_DATETIME ,
-       TAB_A.JOURNAL_ACTION_CLASS ,
-       TAB_A.ID                   ,
-       TAB_A.NAME                 ,
-       TAB_A.VALUE                ,
-       TAB_A.MENU_ID              ,
-       TAB_B.MENU_GROUP_ID        ,
-       TAB_A.NOTE                 ,
-       TAB_A.DISUSE_FLAG          ,
-       TAB_A.LAST_UPDATE_TIMESTAMP,
-       TAB_A.LAST_UPDATE_USER      
-FROM   A_SEQUENCE_JNL as TAB_A
-       LEFT JOIN D_MENU_LIST as TAB_B on TAB_A.MENU_ID = TAB_B.MENU_ID
-WHERE  TAB_A.ID > 0 AND
-       TAB_A.MENU_ID IS NOT NULL;
+FROM A_SEQUENCE  as TAB_A
+     LEFT JOIN D_MENU_LIST as TAB_B on TAB_A.MENU_ID = TAB_B.MENU_ID
+WHERE TAB_A.MENU_ID IS NOT NULL;
 
 -- *****************************************************************************
 -- *** WEB-DBCORE Views *****                                                ***

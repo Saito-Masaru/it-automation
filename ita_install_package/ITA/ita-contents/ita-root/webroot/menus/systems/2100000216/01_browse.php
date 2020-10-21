@@ -13,6 +13,12 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 //
+//////////////////////////////////////////////////////////////////////////
+//
+//  【処理概要】
+//   ・登録/全件ダウンロード/変更履歴タブを削除
+//
+//////////////////////////////////////////////////////////////////////////
 
     $tmpAry=explode('ita-root', dirname(__FILE__));$root_dir_path=$tmpAry[0].'ita-root';unset($tmpAry);
 

@@ -23,79 +23,81 @@
 $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
     global $g;
 
-    $arrayWebSetting = array();
+    $arrayWebSetting = [];
     $arrayWebSetting['page_info'] = $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230001");
 
-    // 項番
-    $table = new TableControlAgent('D_SEQUENCE', 'ID',  $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230011"), 'D_SEQUENCE_JNL');
+    // シーケンス名
+    $table = new simpleTableControlAgent('D_SEQUENCE', 'NAME',  $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230011"));
 
-    // TABLE settings
+    // Table settings
     $table->setDBMainTableLabel($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230002"));
     $table->setGeneObject('AutoSearchStart',true);  //('',true,false)
     $table->setGeneObject('webSetting', $arrayWebSetting);
     $table->setDBMainTableHiddenID('A_SEQUENCE');
-    $table->setDBJournalTableHiddenID('A_SEQUENCE_JNL');
-
-    // シーケンス名
-    $c = new TextColumn('NAME',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230021"));
-    $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230022"));
-    $c->setRequired(true);
-    $c->setValidator(new TextValidator(0, 64, false));
-    $c->setHiddenMainTableColumn(true);
-    $table->addColumn($c);
+    $table->setDBSortKey(["DISP_SEQ"=>"ASC"]);
 
     // 設定値
-    $c = new TextColumn('VALUE',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230031"));
-    $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230032"));
+    //$c = new TextColumn('VALUE',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230021"));
+    $c = new NumColumn('VALUE',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230021"));
+    $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230022"));
     $c->setRequired(true);
     $c->setValidator(new IntNumValidator(-2147483648, 2147483647, false));
     $c->setHiddenMainTableColumn(true);
     $table->addColumn($c);
 
     // MENU_GROUP
-    $c = new IDColumn('MENU_GROUP_ID', $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230041"), 'D_MENU_GROUP_LIST', 'MENU_GROUP_ID', 'MENU_GROUP_NAME', NULL);
+    $c = new IDColumn('MENU_GROUP_ID', $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230031"), 'D_MENU_GROUP_LIST', 'MENU_GROUP_ID', 'MENU_GROUP_NAME', NULL);
     $c->setRequired(false);
-    $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230042"));
+    $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230032"));
     $c->setHiddenMainTableColumn(false);
     $table->addColumn($c);
 
-    // MENU_ID
-    $c = new IDColumn('MENU_ID', $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230051"), 'D_MENU_LIST', 'MENU_ID', 'MENU_NAME', NULL);
+    // MENU
+    $c = new IDColumn('MENU_ID', $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230041"), 'D_MENU_LIST', 'MENU_ID', 'MENU_NAME', NULL);
     $c->setRequired(false);
+    $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230042"));
+    $c->setHiddenMainTableColumn(true);
+    $table->addColumn($c);
+
+    // 表示順序
+    //$c = new TextColumn('DISP_SEQ',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230051"));
+    $c = new NumColumn('DISP_SEQ',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230051"));
     $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230052"));
+    $c->setRequired(false);
+    $c->setValidator(new IntNumValidator(-2147483648, 2147483647, false));
     $c->setHiddenMainTableColumn(true);
     $table->addColumn($c);
 
     $table->fixColumn();
 
-    // SEQENCE settings(このloadTableでの管理用)
     $tmpAryColumn = $table->getColumns();
-    $tmpAryColumn['ID']->setSequenceID('SEQ_A_SEQUENCE');
-    $tmpAryColumn['JOURNAL_SEQ_NO']->setSequenceID('JSEQ_A_SEQUENCE');
-
-    // 廃止フラグ非表示(filter条件含め)
+    // ----非表示項目設定
+    // 廃止ボタン
     $tmpAryColumn['DISUSE_FLAG']->getOutputType('filter_table')->setVisible(false);
     $tmpAryColumn['DISUSE_FLAG']->getOutputType('print_table')->setVisible(false);
     $tmpAryColumn['DISUSE_FLAG']->getOutputType('update_table')->setVisible(false);
     $tmpAryColumn['DISUSE_FLAG']->getOutputType('register_table')->setVisible(false);
     $tmpAryColumn['DISUSE_FLAG']->getOutputType('excel')->setVisible(false);
-
-    // 最終更新日時非表示(filter条件含め)
+    // 最終更新日時
     $tmpAryColumn['LAST_UPDATE_TIMESTAMP']->getOutputType('filter_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_TIMESTAMP']->getOutputType('print_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_TIMESTAMP']->getOutputType('update_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_TIMESTAMP']->getOutputType('register_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_TIMESTAMP']->getOutputType('excel')->setVisible(false);
-
-    // 最終更新者非表示(filter条件含め)
+    // 最終更新者
     $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('filter_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('print_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('update_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('register_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('excel')->setVisible(false);
+    // 非表示項目設定----
 
     return $table;
 };
 loadTableFunctionAdd($tmpFx,__FILE__);
 unset($tmpFx);
-?>
+
+$root_dir_path = preg_replace('|^(.*/ita-root)/.*$|', '$1', __FILE__);
+require $root_dir_path.'/libs/webindividuallibs/systems/2100000216/simpleTableControlAgent_class.php';
+require $root_dir_path.'/libs/webindividuallibs/systems/2100000216/column_class.php';
+
