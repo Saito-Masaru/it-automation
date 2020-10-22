@@ -37,12 +37,12 @@ $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
     $table->setDBSortKey(["DISP_SEQ"=>"ASC"]);
 
     // 設定値
-    //$c = new TextColumn('VALUE',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230021"));
     $c = new NumColumn('VALUE',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230021"));
     $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230022"));
     $c->setRequired(true);
     $c->setValidator(new IntNumValidator(-2147483648, 2147483647, false));
     $c->setHiddenMainTableColumn(true);
+    $c->setSubtotalFlag(false);
     $table->addColumn($c);
 
     // MENU_GROUP
@@ -60,12 +60,12 @@ $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
     $table->addColumn($c);
 
     // 表示順序
-    //$c = new TextColumn('DISP_SEQ',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230051"));
     $c = new NumColumn('DISP_SEQ',$g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230051"));
     $c->setDescription($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230052"));
     $c->setRequired(false);
     $c->setValidator(new IntNumValidator(-2147483648, 2147483647, false));
     $c->setHiddenMainTableColumn(true);
+    $c->setSubtotalFlag(false);
     $table->addColumn($c);
 
     $table->fixColumn();
