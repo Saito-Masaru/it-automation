@@ -1,5 +1,5 @@
 <?php
-//   Copyright 2019 NEC Corporation
+//   Copyright 2020 NEC Corporation
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ class simpleTableControlAgent extends TableControlAgent {
         データの出力はFormatterに委譲
     */
 
-    function prepareColumn(&$arrayVariant=array()) {
+    function prepareColumn(&$arrayVariant=[]) {
         global $g;
         $strRIColumnLabel = isset($arrayVariant['TT_SYS_00_ROW_IDENTIFY_LABEL'])?$arrayVariant['TT_SYS_00_ROW_IDENTIFY_LABEL']:$g['objMTS']->getSomeMessage("ITAWDCH-STD-18002");
         $strJnlSeqNoColLabel = isset($arrayVariant['TT_SYS_01_JNL_SEQ_LABEL'])?$arrayVariant['TT_SYS_01_JNL_SEQ_LABEL']:$g['objMTS']->getSomeMessage("ITAWDCH-STD-18003");
@@ -41,7 +41,7 @@ class simpleTableControlAgent extends TableControlAgent {
         //
         $boolDefaultColumnsSet = isset($arrayVariant['DEFAULT_COLUMNS_SET'])?$arrayVariant['DEFAULT_COLUMNS_SET']:true;
         //
-        if( $boolDefaultColumnsSet === true ){
+        if ($boolDefaultColumnsSet === true) {
             //----ここから必須系[1]
             $c = new RowEditByFileColumn($this->getRequiredRowEditByFileColumnID(), $strRowEditByFileColLabel);
             $this->addColumn($c);
@@ -63,7 +63,6 @@ class simpleTableControlAgent extends TableControlAgent {
             $this->addColumn($c);
             //ここまで必須系[1]----
         }
-        //
     }
 }
 

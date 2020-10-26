@@ -1,5 +1,5 @@
 <?php
-//   Copyright 2019 NEC Corporation
+//   Copyright 2020 NEC Corporation
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -20,14 +20,20 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-$tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
+$root_dir_path = preg_replace('|^(.*/ita-root)/.*$|', '$1', __FILE__);
+require $root_dir_path.'/libs/webindividuallibs/systems/2100000216/simpleTableControlAgent_class.php';
+require $root_dir_path.'/libs/webindividuallibs/systems/2100000216/column_class.php';
+
+$tmpFx = function (&$aryVariant=[],&$arySetting=[]){
     global $g;
 
     $arrayWebSetting = [];
     $arrayWebSetting['page_info'] = $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230001");
 
+    $aryVariant['TT_SYS_06_LUP_USER_SET'] = false; // LAST_UPDATE_USERを使用しない
+
     // シーケンス名
-    $table = new simpleTableControlAgent('D_SEQUENCE', 'NAME',  $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230011"));
+    $table = new simpleTableControlAgent('D_SEQUENCE', 'NAME', $g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230011"), null, $aryVariant);
 
     // Table settings
     $table->setDBMainTableLabel($g['objMTS']->getSomeMessage("ITAWDCH-MNU-1230002"));
@@ -68,7 +74,7 @@ $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
     $c->setSubtotalFlag(false);
     $table->addColumn($c);
 
-    $table->fixColumn();
+    $table->fixColumn($aryVariant);
 
     $tmpAryColumn = $table->getColumns();
     // ----非表示項目設定
@@ -84,20 +90,10 @@ $tmpFx = function (&$aryVariant=array(),&$arySetting=array()){
     $tmpAryColumn['LAST_UPDATE_TIMESTAMP']->getOutputType('update_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_TIMESTAMP']->getOutputType('register_table')->setVisible(false);
     $tmpAryColumn['LAST_UPDATE_TIMESTAMP']->getOutputType('excel')->setVisible(false);
-    // 最終更新者
-    $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('filter_table')->setVisible(false);
-    $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('print_table')->setVisible(false);
-    $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('update_table')->setVisible(false);
-    $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('register_table')->setVisible(false);
-    $tmpAryColumn['LAST_UPDATE_USER']->getOutputType('excel')->setVisible(false);
     // 非表示項目設定----
 
     return $table;
 };
 loadTableFunctionAdd($tmpFx,__FILE__);
 unset($tmpFx);
-
-$root_dir_path = preg_replace('|^(.*/ita-root)/.*$|', '$1', __FILE__);
-require $root_dir_path.'/libs/webindividuallibs/systems/2100000216/simpleTableControlAgent_class.php';
-require $root_dir_path.'/libs/webindividuallibs/systems/2100000216/column_class.php';
 

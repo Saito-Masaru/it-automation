@@ -1,5 +1,5 @@
 <?php
-//   Copyright 2019 NEC Corporation
+//   Copyright 2020 NEC Corporation
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -133,7 +133,7 @@ function updateTableMain($intBaseMode, $strNumberForRI, $reqUpdateData=null, $st
         if (isset($aryVariant["TCA_PRESERVED"]) === false) {
             $aryVariant["TCA_PRESERVED"] = array();
         }
-        $aryVariant["TCA_PRESERVED"]["TCA_ACTION"]=array("ACTION_MODE"=>"DTUP_singleRecUpdate");
+        $aryVariant["TCA_PRESERVED"]["TCA_ACTION"] = ["ACTION_MODE"=>"DTUP_singleRecUpdate"];
         //固有----
 
         //----権限の取得/判定
@@ -162,7 +162,7 @@ function updateTableMain($intBaseMode, $strNumberForRI, $reqUpdateData=null, $st
 
         // ----モードによって処理分岐
         switch($intBaseMode) {
-            case 1 :
+            case 1:
                 // ----更新情報入力(mode=1)
                 //
                 // ----更新対象レコードをSELECT
@@ -173,7 +173,7 @@ function updateTableMain($intBaseMode, $strNumberForRI, $reqUpdateData=null, $st
                 $intErrorType = $arrayResult[2];
                 // 更新対象レコードをSELECT----
 
-                if ($selectRowLength == 1) {
+                if ($selectRowLength === 1) {
                     $strOutputStr = $objListFormatter->printWebUIEditForm($arySetting,$objTable,$aryVariant,$strFormatterId,$strNumberForRI,$editTgtRow);
                 } else {
                     $objColumn = $arrayObjColumn[$objTable->getRIColumnID()];
@@ -181,7 +181,7 @@ function updateTableMain($intBaseMode, $strNumberForRI, $reqUpdateData=null, $st
                 }
                 break;
                 // 更新情報入力(mode=1)----
-            case 3 :
+            case 3:
                 // ----更新処理実行(mode=3)
                 
                 $boolZenHanDistinct = $objTable->getFormatter($strFormatterId)->getGeneValue("zenHanDistinct");
@@ -189,10 +189,10 @@ function updateTableMain($intBaseMode, $strNumberForRI, $reqUpdateData=null, $st
                     //[ブラウザ]
                     hiddenColumnIdDecode($objTable,$reqUpdateData);
                     $varCommitSpan = 1;
-                } else if ($ordMode == 1 || $ordMode == 2 || $ordMode == 3) {
+                } else if ($ordMode === 1 || $ordMode === 2 || $ordMode === 3) {
                     //[EXCEL/CSV/JSON]
                     $varCommitSpan = $objTable->getCommitSpanOnTableIUDByFile();
-                } else if ($ordMode == 4) {
+                } else if ($ordMode === 4) {
                     //[ブラウザ(SQLトランザクション無し)]
                     $varCommitSpan = 0;
                 } else {
@@ -234,12 +234,12 @@ function updateTableMain($intBaseMode, $strNumberForRI, $reqUpdateData=null, $st
                 
                 if ($selectRowLength === 1) {
                     //----更新対象の行が特定できた
-                    if ($editTgtRow[$lcRequiredDisuseFlagColumnId] == "1" && $intBaseMode==3) {
+                    if ($editTgtRow[$lcRequiredDisuseFlagColumnId] == "1" && $intBaseMode === 3) {
                         // ----更新依頼されたが、削除済：削除済み(11)を返却する。
                         $intErrorType = 212;
                         throw new Exception( '00001100-([FUNCTION]' . $strFxName . ',[FILE]' . __FILE__ . ',[LINE]' . __LINE__ . ')' );
                         // 更新依頼されたが、削除済：削除済み(11)を返却する。----
-                    } else if ($reqUpdateData[$lcRequiredUpdateDate4UColumnId] != $editTgtRow[$lcRequiredUpdateDate4UColumnId]) {
+                    } else if ($reqUpdateData[$lcRequiredUpdateDate4UColumnId] !== $editTgtRow[$lcRequiredUpdateDate4UColumnId]) {
                         //----追い越し判明
                         $intErrorType = 201;
                         throw new Exception( '00001200-([FUNCTION]' . $strFxName . ',[FILE]' . __FILE__ . ',[LINE]' . __LINE__ . ')' );
@@ -405,14 +405,7 @@ function updateTableMain($intBaseMode, $strNumberForRI, $reqUpdateData=null, $st
 
                 if ($selectRowLength === 1) {
                     //----更新対象の行が特定できた
-                    /* 本体tableからdisuse_flagを削除したので関連queryをskip
-                    if ($editTgtRow[$lcRequiredDisuseFlagColumnId] == "1" && $intBaseMode===3) {
-                        // ----更新依頼されたが、削除済：削除済み(11)を返却する。
-                        $intErrorType = 212;
-                        throw new Exception( '00001700-([FUNCTION]' . $strFxName . ',[FILE]' . __FILE__ . ',[LINE]' . __LINE__ . ')' );
-                        // 更新依頼されたが、削除済：削除済み(11)を返却する。----
-                    } else
-                    */
+                    // 本体tableからdisuse_flagを削除したので関連queryをskip
                     if ($reqUpdateData[$lcRequiredUpdateDate4UColumnId] != $editTgtRow[$lcRequiredUpdateDate4UColumnId]) {
                         //----追い越し判明
                         $intErrorType = 201;
