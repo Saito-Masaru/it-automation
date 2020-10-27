@@ -405,11 +405,10 @@ function updateTableMain($intBaseMode, $strNumberForRI, $reqUpdateData=null, $st
 
                 if ($selectRowLength === 1) {
                     //----更新対象の行が特定できた
-                    // 本体tableからdisuse_flagを削除したので関連queryをskip
-                    if ($reqUpdateData[$lcRequiredUpdateDate4UColumnId] != $editTgtRow[$lcRequiredUpdateDate4UColumnId]) {
+                    if ($reqUpdateData[$lcRequiredUpdateDate4UColumnId] !== $editTgtRow[$lcRequiredUpdateDate4UColumnId]) {
                         //----追い越し判明
                         $intErrorType = 201;
-                        throw new Exception( '00001800-([FUNCTION]' . $strFxName . ',[FILE]' . __FILE__ . ',[LINE]' . __LINE__ . ')' );
+                        throw new Exception('00001800-([FUNCTION]' . $strFxName . ',[FILE]' . __FILE__ . ',[LINE]' . __LINE__ . ')');
                         //追い越し判明----
                     } 
                     //更新対象の行が特定できた----
@@ -649,7 +648,6 @@ function selectRowForUpdateWithoutNumericCheck (&$objTCA, $intRINo, $strOrdMode,
     $intErrorType = null;
     
     $sql = generateSelectSQLforUpdate($objTCA, $intMode);
-    error_log('selectRowForUpdate SQL=>'.$sql);
     
     $strFxName = __FUNCTION__;
     $intTmpRowCount=0;
