@@ -24,7 +24,7 @@
 
     //-- サイト個別PHP要素、ここから--
     //-- サイト個別PHP要素、ここまで--
-    require_once ( $root_dir_path . "/libs/webcommonlibs/table_control_agent/web_parts_for_template_01_browse.php");
+    require_once $root_dir_path."/libs/webcommonlibs/table_control_agent/web_parts_for_template_01_browse.php";
     //-- サイト個別PHP要素、ここから--
     //-- サイト個別PHP要素、ここまで--
 
@@ -161,5 +161,5 @@ EOD;
 <!-- サイト個別html要素、ここまで//-->
 EOD;
     //  共通HTMLフッタパーツ
-    require_once ( $root_dir_path . "/libs/webcommonlibs/web_parts_html_footer.php");
+    require_once $root_dir_path."/libs/webcommonlibs/web_parts_html_footer.php";
 

@@ -23,7 +23,7 @@
 $root_dir_path = preg_replace('|^(.*/ita-root)/.*$|', '$1', __FILE__);
 //-- サイト個別PHP要素、ここから--
 //-- サイト個別PHP要素、ここまで--
-require $root_dir_path."/libs/webcommonlibs/table_control_agent/web_parts_for_template_02_access.php";
+require_once $root_dir_path."/libs/webcommonlibs/table_control_agent/web_parts_for_template_02_access.php";
 //-- サイト個別PHP要素、ここから--
 //-- サイト個別PHP要素、ここまで--
 class Db_Access extends Db_Access_Core {
@@ -46,7 +46,7 @@ class Db_Access extends Db_Access_Core {
         $arySetting = ["Mix1_1","fakeContainer_Update1","Filter1Tbl"];
 
         // 本体ロジックをコール
-        require $g['root_dir_path']."/libs/webindividuallibs/systems/2100000216/04_updateTable.php";
+        require_once $g['root_dir_path']."/libs/webindividuallibs/systems/2100000216/04_updateTable.php";
         $arrayResult = updateTableMain($mode, $innerSeq, $arrayUpdateData, null, 0, $aryVariant, $arySetting);
 
         // 結果判定
