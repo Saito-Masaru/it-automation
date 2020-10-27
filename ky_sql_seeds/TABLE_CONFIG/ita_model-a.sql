@@ -17,7 +17,6 @@ MENU_ID                 %INT%                   ,
 DISP_SEQ                %INT%                   ,
 NOTE                    %VARCHR%(4000)          ,
 LAST_UPDATE_TIMESTAMP   %DATETIME6%             ,
-LAST_UPDATE_USER        %INT%                   ,
 PRIMARY KEY(NAME)
 )%%TABLE_CREATE_OUT_TAIL%%;
 
@@ -3235,8 +3234,7 @@ SELECT TAB_A.NAME                 ,
        TAB_A.DISP_SEQ             ,
        TAB_A.NOTE                 ,
        '0' as DISUSE_FLAG         ,
-       TAB_A.LAST_UPDATE_TIMESTAMP,
-       TAB_A.LAST_UPDATE_USER      
+       TAB_A.LAST_UPDATE_TIMESTAMP
 FROM A_SEQUENCE  as TAB_A
      LEFT JOIN D_MENU_LIST as TAB_B on TAB_A.MENU_ID = TAB_B.MENU_ID
 WHERE TAB_A.MENU_ID IS NOT NULL;
